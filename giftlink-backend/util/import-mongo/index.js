@@ -1,13 +1,17 @@
+
 require('dotenv').config();
+
 const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
 
 // MongoDB connection URL with authentication options
 let url = `${process.env.MONGO_URL}`;
+console.log(url, 'urllllll')
+//let url = "mongodb://root:CIAgFfhchpGoB69QmXSFBTvT@172.21.233.231:27017";
 let filename = `${__dirname}/gifts.json`;
 const dbName = 'giftdb';
 const collectionName = 'gifts';
-console.log("url")
+console.log("url", url)
 
 // notice you have to load the array of gifts into the data object
 const data = JSON.parse(fs.readFileSync(filename, 'utf8')).docs;
