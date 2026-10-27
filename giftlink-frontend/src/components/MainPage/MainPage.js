@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { urlConfig } from "../../config";
+import { useAppContext, } from "../../context/AuthContext";
 
 function MainPage() {
   const [gifts, setGifts] = useState([]);
   const navigate = useNavigate();
-
+  const {isLoggedIn} = useAppContext(); // Assuming you have an auth context or hook
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/app/login");
+    }
+    
     // fetch all gifts
     const fetchGifts = async () => {
       try {
