@@ -9,7 +9,14 @@ function DetailsPage() {
   const [gift, setGift] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+const formatDate = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleString("default", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
   useEffect(() => {
     const authenticationToken = sessionStorage.getItem("auth-token");
     if (!authenticationToken) {
@@ -76,6 +83,7 @@ function DetailsPage() {
   if (error) return <div>Error: {error}</div>;
   if (!gift) return <div>Gift not found</div>;
 
+
   return (
     <div className="container mt-5">
       <button className="btn btn-secondary mb-3" onClick={handleBackClick}>
@@ -113,12 +121,12 @@ function DetailsPage() {
           <p>
             <strong>Date Added:</strong>
             {/* insert code here  */}
-            {gift.date_added}
+            {formatDate(gift.date_added)}
           </p>
           <p>
             <strong>Age (Years):</strong>
             {/* insert code here  */}
-            {gift.age}
+            {gift.age_years}
           </p>
           <p>
             <strong>Description:</strong>
